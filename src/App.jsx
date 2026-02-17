@@ -1,35 +1,61 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+const items = [
+  { type: "card", content: "📦 Product Card" },
+  { type: "text", content: "📝 Text content block" },
+  { type: "button", content: "🔘 Click Me" },
+  { type: "image", content: "🖼 Image Placeholder" },
+  { type: "card", content: "📦 Another Card" },
+  { type: "text", content: "📝 More text here" },
+  { type: "button", content: "🔘 Another Button" },
+  { type: "card", content: "📦 Final Card" }
+];
 
+export default function App() {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <main className="app">
+      <h1 className="title">Scrollable Layout</h1>
 
-export default App
+      <section className="scrollable">
+        {items.map((item, index) => {
+          switch (item.type) {
+            case "card":
+              return (
+                <div key={index} className="card">
+                  {item.content}
+                </div>
+              );
+
+            case "text":
+              return (
+                <p key={index} className="text">
+                  {item.content}
+                </p>
+              );
+
+            case "button":
+              return (
+                <button
+                  key={index}
+                  className="btn"
+                  onClick={() => alert(`Clicked: ${item.content}`)}
+                >
+                  {item.content}
+                </button>
+              );
+
+            case "image":
+              return (
+                <div key={index} className="image">
+                  {item.content}
+                </div>
+              );
+
+            default:
+              return null;
+          }
+        })}
+      </section>
+    </main>
+  );
+}
